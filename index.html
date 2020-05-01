@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="lib/resource-manager.js"></script>
+    <script src="lib/channel-manager.js"></script>
+    <script src="lib/utils.js"></script>
+    <script src="lib/dictionary.js"></script>
+    <script src="lib/timer.js"></script>
+    <script src="js/players.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/start-form.js"></script>
+    <script src="js/play-form.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="timer" id="timer">
+            <div class="count"></div>
+        </div>
+        <div id="frmStart">
+            <h1>Guess Game</h1>
+            <p>A game of words, enter a list of words into the dictionary and the number of players to start a game.
+                Players take turns to input a list of guessing
+                words to match the words in the dictionary, 20 seconds timer is ticking for each turn, so you must be
+                smart and quick!</p>
+            <form>
+                <div class="form-group">
+                    <label for="player-num" title="Number of players" aria-label="Number of players">Number of
+                        players</label>
+                    <input type="text" class="form-control js-player-num" id="player-num"
+                        aria-labelledby="player-num-help">
+                    <small id="player-num-help">Please enter how many players in the game</small>
+                    <div class="invalid-msg js-player-invalid">
+                        The number of players should be from <span class="js-min"></span> to <span
+                            class="js-max"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dictionary-words" aria-label="Input dictionary words"
+                        title="Input dictionary words">Dictionary Words</label>
+                    <textarea id="dictionary-words" class="form-control js-dictionary-words"
+                        aria-labelledby="dictionary-words-help"></textarea>
+                    <small id="dictionary-words-help">Please enter a list of words with ',' separated(Max. <span
+                            class="js-max"></span>)</small>
+                    <div class="invalid-msg js-invalid">
+                        The number of words should not be more than <span></span> or none.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary js-start-btn" title="Start the game"
+                    aria-label="Start the game">Start</button>
+            </form>
+        </div>
+        <div id="frmPlay">
+            <h1>Playing...</h1>
+            <form>
+                <div class="form-group">
+                    <label title="Current player" aria-label="Current player">Player <span
+                            class="js-user-id"></span></label>
+                    <div class="success"></div>
+                    <input type="text" class="form-control js-player-input" id="player-input"
+                        aria-labeledby="player-input-help">
+                    <small id="player-input-help">Please enter a list of words you guess with ',' separated</small>
+                    <div class="invalid-msg js-invalid">
+                        The number of words should not be more than <span></span> or none.
+                    </div>
+                    <span class="error"></span>
+                </div>
+                <button type="submit" class="btn js-submit-btn" title="Submit your words"
+                    aria-label="Submit your words">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        Game.init({
+            $startForm: $('#frmStart'),
+            $playForm: $('#frmPlay'),
+            // The game still works without timer as you can comment it out
+            $timer: $('#timer'),
+        })
+        Game.run();
+    </script>
+</body>
+
+</html>
